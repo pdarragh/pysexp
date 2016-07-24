@@ -40,3 +40,13 @@ def test_cons():
         cons(Atom('a'), 4)
         cons(3, Atom('b'))
     assert cons(Atom('a'), Atom('b')) == SExpression(Atom('a'), Atom('b'))
+
+
+@pytest.mark.parametrize('x,y', [
+    (SExpression(Atom('a'), Atom('b')), SExpression(Atom('c'), Atom('d'))),
+])
+def test_relations(x, y):
+    assert car(cons(x, y)) == x
+    assert cdr(cons(x, y)) == y
+    assert cons(car(x), cdr(x)) == x
+    assert cons(car(y), cdr(y)) == y
