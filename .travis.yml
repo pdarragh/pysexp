@@ -1,0 +1,14 @@
+# Travis-CI Settings
+language: python
+python:
+  - "3.5"
+
+# Install dependencies
+before_install:
+  - pip install python-coveralls
+
+# Run tests
+script: py.test
+
+# Upon completion
+after_script: coveralls
