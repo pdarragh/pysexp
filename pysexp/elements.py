@@ -14,23 +14,44 @@ class Atom(BaseSExpression):
 
 
 class Nil(Atom):
+    __is_frozen = False
+
     def __init__(self):
         super().__init__(None)
+        self.__is_frozen = True
 
     def __repr__(self):
         return 'NIL'
 
     def __str__(self):
-        return str(self)
+        return repr(self)
+
+    def __eq__(self, other):
+        return isinstance(other, Nil)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __setattr__(self, key, value):
+        if self.__is_frozen:
+            raise AttributeError("NIL values cannot be modified")
+        else:
+            super().__setattr__(key, value)
+
+
+NIL = Nil()
 
 
 class SExpression(BaseSExpression):
     def __init__(self, car, cdr=None):
-        self.car = car
         if cdr is None:
-            self.cdr = Nil()
-        else:
-            self.cdr = cdr
+            cdr = NIL
+        if not (isinstance(car, BaseSExpression) and isinstance(cdr, BaseSExpression)):
+            raise ValueError("S-Expressions may only be composed of other S-Expressions")
+        if isinstance(cdr, Atom) and cdr != NIL:
+            pass
+        self.car = car
+        self.cdr = cdr
 
     @property
     def internal_repr(self):
@@ -38,10 +59,8 @@ class SExpression(BaseSExpression):
 
     @property
     def internal_str(self):
-        if isinstance(self.cdr, Nil):
+        if self.cdr == NIL:
             return str(self.car)
-        elif isinstance(self.cdr, SExpression):
-            return str(self.car) + ', ' + self.cdr.internal_str
         else:
             return str(self.car) + ', ' + str(self.cdr)
 
