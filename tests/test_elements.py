@@ -51,6 +51,8 @@ def test_sexpression(car, cdr, s_repr, s_str):
     assert s.cdr == cdr
     assert repr(s) == s_repr
     assert str(s) == s_str
+    assert s == SExpression(car, cdr)
+    assert s != SExpression(cdr, car)
 
 
 def test_sexpression_single():

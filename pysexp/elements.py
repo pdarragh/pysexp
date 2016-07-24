@@ -77,3 +77,11 @@ class SExpression(BaseSExpression):
 
     def __str__(self):
         return '(' + self.internal_str + ')'
+
+    def __eq__(self, other):
+        if not isinstance(other, SExpression):
+            return False
+        return (self.car == other.car) and (self.cdr == other.cdr)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
