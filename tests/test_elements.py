@@ -27,6 +27,8 @@ def test_NIL():
     assert NIL.value is None
     assert repr(NIL) == repr(n)
     assert str(NIL) == str(n)
+    with pytest.raises(AttributeError):
+        n.x = 42
 
 
 @pytest.mark.parametrize('car,cdr,s_repr,s_str', [
@@ -53,4 +55,15 @@ def test_sexpression_single():
     s = SExpression(car)
     assert s.car == car
     assert s.cdr == NIL
+    assert str(s) == '(1)'
+
+
+@pytest.mark.parametrize('car,cdr', [
+    (Atom(1), 2),
+    ('a', Atom('b')),
+    (1.2, 3.4),
+])
+def test_sexpression_error(car, cdr):
+    with pytest.raises(ValueError):
+        SExpression(car, cdr)
 
