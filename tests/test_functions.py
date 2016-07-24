@@ -13,7 +13,11 @@ import pytest
 def test_atom(val):
     a = Atom(val)
     assert atom(a) == True
-    assert atom(val) == False
+    if isinstance(val, BaseSExpression):
+        assert atom(val) == False
+    else:
+        with pytest.raises(ValueError):
+            atom(val)
 
 
 def test_eq():

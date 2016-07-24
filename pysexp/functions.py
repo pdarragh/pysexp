@@ -1,29 +1,41 @@
 from .elements import *
 
 
+def check_args_instance_of(base_class):
+    def wrap(base_function):
+        def wrapper(*args, **kwargs):
+            for arg in args:
+                if not isinstance(arg, base_class):
+                    raise ValueError("{} is defined only for instances of {}".format(
+                        base_function.__name__, base_class.__name__))
+            return base_function(*args, **kwargs)
+        return wrapper
+    return wrap
+
+
+@check_args_instance_of(BaseSExpression)
 def atom(x):
     return isinstance(x, Atom)
 
 
+@check_args_instance_of(BaseSExpression)
+@check_args_instance_of(Atom)
 def eq(x, y):
-    if not isinstance(x, Atom) or not isinstance(y, Atom):
-        raise ValueError("eq is undefined for non-atomic values")
     return x == y
 
 
+@check_args_instance_of(BaseSExpression)
+@check_args_instance_of(SExpression)
 def car(x):
-    if not isinstance(x, SExpression):
-        raise ValueError("car is defined only for S-Expressions")
     return x.car
 
 
+@check_args_instance_of(BaseSExpression)
+@check_args_instance_of(SExpression)
 def cdr(x):
-    if not isinstance(x, SExpression):
-        raise ValueError("cdr is defined only for S-Expressions")
     return x.cdr
 
 
+@check_args_instance_of(BaseSExpression)
 def cons(x, y):
-    if not isinstance(x, BaseSExpression) or not isinstance(y, BaseSExpression):
-        raise ValueError("cons is undefined for values that do not subclass BaseSExpression")
     return SExpression(x, y)
