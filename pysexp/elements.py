@@ -32,13 +32,21 @@ class SExpression(BaseSExpression):
         else:
             self.cdr = cdr
 
+    @property
+    def internal_repr(self):
+        return repr(self.car) + ', ' + repr(self.cdr)
+
+    @property
+    def internal_str(self):
+        if isinstance(self.cdr, Nil):
+            return str(self.car)
+        elif isinstance(self.cdr, SExpression):
+            return str(self.car) + ', ' + self.cdr.internal_str
+        else:
+            return str(self.car) + ', ' + str(self.cdr)
+
     def __repr__(self):
-        return '(' + repr(self.car) + ', ' + repr(self.cdr) + ')'
+        return '(' + self.internal_repr + ')'
 
     def __str__(self):
-        result = '(' + repr(self.car)
-        if isinstance(self.cdr, Nil):
-            result += ')'
-        else:
-            result += ', ' + repr(self.cdr) + ')'
-        return result
+        return '(' + self.internal_str + ')'
