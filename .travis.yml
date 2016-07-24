@@ -5,6 +5,7 @@ python:
 
 # Install dependencies
 before_install:
+  - pip install pytest-cov
   - pip install python-coveralls
 
 # Run tests
