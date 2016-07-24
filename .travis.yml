@@ -8,7 +8,7 @@ before_install:
   - pip install python-coveralls
 
 # Run tests
-script: py.test
+script: py.test --cov=pysexp
 
 # Upon completion
 after_script: coveralls
