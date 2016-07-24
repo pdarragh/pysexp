@@ -5,4 +5,4 @@ This module provides a full implementation of John McCarthy's definition of the 
 paper "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part 1".
 """
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
