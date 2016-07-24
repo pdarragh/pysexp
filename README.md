@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/pdarragh/pysexp.svg?branch=master)](https://travis-ci.org/pdarragh/pysexp)
+[![Coverage Status](https://coveralls.io/repos/github/pdarragh/pysexp/badge.svg?branch=master)](https://coveralls.io/github/pdarragh/pysexp?branch=master)
+
 # PySexp
 
 PySexp is a Python S-expression module. It defines the basic components and functions of S-expressions according to the
