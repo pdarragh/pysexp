@@ -33,3 +33,11 @@ def equal(x, y):
         return equal(car(x), car(y)) and equal(cdr(x), cdr(y))
     else:
         return False
+
+
+@check_args_instance_of(BaseSExpression)
+@optimize_tail_call
+def slist(*args):
+    if len(args) == 0:
+        return NIL
+    return cons(args[0], slist(*args[1:]))
