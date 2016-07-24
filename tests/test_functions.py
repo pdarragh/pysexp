@@ -42,6 +42,14 @@ def test_cdr():
     assert cdr(SExpression(Atom('a'), Atom('b'))) == Atom('b')
 
 
+def test_composites():
+    s = SExpression(SExpression(Atom('a'), Atom('b')), SExpression(Atom('c'), Atom('d')))
+    assert caar(s) == Atom('a')
+    assert cadr(s) == Atom('c')
+    assert cdar(s) == Atom('b')
+    assert cddr(s) == Atom('d')
+
+
 def test_cons():
     with pytest.raises(ValueError):
         cons(Atom('a'), 4)

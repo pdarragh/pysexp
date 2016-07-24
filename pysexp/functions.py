@@ -30,6 +30,18 @@ def cdr(x):
     return x.cdr
 
 
+def caar(x): return car(car(x))
+
+
+def cadr(x): return car(cdr(x))
+
+
+def cdar(x): return cdr(car(x))
+
+
+def cddr(x): return cdr(cdr(x))
+
+
 @check_args_instance_of(BaseSExpression)
 def cons(x, y):
     return SExpression(x, y)
