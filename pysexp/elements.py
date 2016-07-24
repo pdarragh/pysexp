@@ -12,6 +12,14 @@ class Atom(BaseSExpression):
     def __str__(self):
         return str(self.value)
 
+    def __eq__(self, other):
+        if not isinstance(other, Atom):
+            return False
+        return self.value == other.value
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class Nil(Atom):
     __is_frozen = False

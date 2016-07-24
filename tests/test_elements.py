@@ -12,6 +12,9 @@ def test_atom(val):
     assert a.value == val
     assert repr(a) == repr(val)
     assert str(a) == str(val)
+    assert a == Atom(val)
+    assert a != Atom('blah')
+    assert a != 42
 
 
 def test_nil():
