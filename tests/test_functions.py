@@ -1,4 +1,3 @@
-from pysexp.elements import *
 from pysexp.functions import *
 
 import pytest
@@ -18,6 +17,10 @@ def test_atom(val):
     else:
         with pytest.raises(ValueError):
             atom(val)
+
+
+def test_null():
+    assert null(NIL)
 
 
 def test_eq():

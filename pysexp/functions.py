@@ -1,21 +1,15 @@
 from .elements import *
-
-
-def check_args_instance_of(base_class):
-    def wrap(base_function):
-        def wrapper(*args, **kwargs):
-            for arg in args:
-                if not isinstance(arg, base_class):
-                    raise ValueError("{} is defined only for instances of {}".format(
-                        base_function.__name__, base_class.__name__))
-            return base_function(*args, **kwargs)
-        return wrapper
-    return wrap
+from .decorators import *
 
 
 @check_args_instance_of(BaseSExpression)
 def atom(x):
     return isinstance(x, Atom)
+
+
+@check_args_instance_of(BaseSExpression)
+def null(x):
+    return atom(x) and x == NIL
 
 
 @check_args_instance_of(BaseSExpression)
