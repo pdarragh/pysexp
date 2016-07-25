@@ -18,16 +18,16 @@ def eq(x, y):
     return x == y
 
 
-@check_args_instance_of(BaseSExpression)
-@check_args_instance_of(SExpression)
 def car(x):
-    return x.car
+    if hasattr(x, '__car__'):
+        return x.__car__()
+    raise AttributeError("type {} does not implement __car__".format(x.__class__.__name__))
 
 
-@check_args_instance_of(BaseSExpression)
-@check_args_instance_of(SExpression)
 def cdr(x):
-    return x.cdr
+    if hasattr(x, '__cdr__'):
+        return x.__cdr__()
+    raise AttributeError("type {} does not implement __cdr__".format(x.__class__.__name__))
 
 
 def caar(x): return car(car(x))

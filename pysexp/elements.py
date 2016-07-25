@@ -58,19 +58,25 @@ class SExpression(BaseSExpression):
             raise ValueError("S-Expressions may only be composed of other S-Expressions")
         if isinstance(cdr, Atom) and cdr != NIL:
             pass
-        self.car = car
-        self.cdr = cdr
+        self.__car = car
+        self.__cdr = cdr
+
+    def __car__(self):
+        return self.__car
+
+    def __cdr__(self):
+        return self.__cdr
 
     @property
     def internal_repr(self):
-        return repr(self.car) + ', ' + repr(self.cdr)
+        return repr(self.__car__()) + ', ' + repr(self.__cdr__())
 
     @property
     def internal_str(self):
-        if self.cdr == NIL:
-            return str(self.car)
+        if self.__cdr__() == NIL:
+            return str(self.__car__())
         else:
-            return str(self.car) + ', ' + str(self.cdr)
+            return str(self.__car__()) + ', ' + str(self.__cdr__())
 
     def __repr__(self):
         return '(' + self.internal_repr + ')'
@@ -81,7 +87,7 @@ class SExpression(BaseSExpression):
     def __eq__(self, other):
         if not isinstance(other, SExpression):
             return False
-        return (self.car == other.car) and (self.cdr == other.cdr)
+        return (self.__car__() == other.__car__()) and (self.__cdr__() == other.__cdr__())
 
     def __ne__(self, other):
         return not self.__eq__(other)
