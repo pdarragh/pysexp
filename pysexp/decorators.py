@@ -9,6 +9,7 @@ def check_args_instance_of(base_class):
                     raise ValueError("{} is defined only for instances of {}".format(
                         base_function.__name__, base_class.__name__))
             return base_function(*args, **kwargs)
+        wrapper.__doc__ = base_function.__doc__
         return wrapper
     return wrap
 
