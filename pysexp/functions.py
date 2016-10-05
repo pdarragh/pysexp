@@ -19,15 +19,11 @@ def eq(x, y):
 
 
 def car(x):
-    if hasattr(x, '__car__'):
-        return x.__car__()
-    raise AttributeError("type {} does not implement __car__".format(x.__class__.__name__))
+    return getattr(x, '__car__')()
 
 
 def cdr(x):
-    if hasattr(x, '__cdr__'):
-        return x.__cdr__()
-    raise AttributeError("type {} does not implement __cdr__".format(x.__class__.__name__))
+    return getattr(x, '__cdr__')()
 
 
 def caar(x): return car(car(x))

@@ -31,13 +31,13 @@ def test_eq():
 
 
 def test_car():
-    with pytest.raises(ValueError):
+    with pytest.raises(AttributeError):
         car(Atom('a'))
     assert car(SExpression(Atom('a'), Atom('b'))) == Atom('a')
 
 
 def test_cdr():
-    with pytest.raises(ValueError):
+    with pytest.raises(AttributeError):
         cdr(Atom('a'))
     assert cdr(SExpression(Atom('a'), Atom('b'))) == Atom('b')
 
