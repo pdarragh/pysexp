@@ -19,11 +19,11 @@ def eq(x, y):
 
 
 def car(x):
-    return getattr(x, '__car__')()
+    return x.__car__()
 
 
 def cdr(x):
-    return getattr(x, '__cdr__')()
+    return x.__car__()
 
 
 def caar(x): return car(car(x))
