@@ -23,7 +23,7 @@ def car(x):
 
 
 def cdr(x):
-    return x.__car__()
+    return x.__cdr__()
 
 
 def caar(x): return car(car(x))

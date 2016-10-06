@@ -11,7 +11,7 @@ class InternalListException(ValueError):
 
 class List(SExpression):
     def __new__(cls, *args):
-        bases = (List, )
+        bases = (cls, )
         inner_type_field = '__inner_type__'
         if len(args) == 0:
             name = 'EmptyList'
