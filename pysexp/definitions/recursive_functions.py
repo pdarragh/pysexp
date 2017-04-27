@@ -1,5 +1,6 @@
+from pysexp.decorators import *
+
 from .functions import *
-from .decorators import *
 
 
 @check_args_instance_of(BaseSExpression)
